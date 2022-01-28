@@ -1,0 +1,29 @@
+* {
+    box-sizing:border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    flex: 0.3;
+    background-color: rgb(115, 187, 211);
+}
+
+main {
+    flex: 2;
+    display: flex;
+    background-color: rgb(202, 235, 247);
+}
+
+section{
+    flex: 1;
+}
+
+aside {
+    flex: 2;
+}
