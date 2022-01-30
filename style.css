@@ -8,7 +8,10 @@ body {
     height: 100vh;
     margin: 0;
 }
-
+ul {
+    margin: 0;
+    list-style-type: none;
+}
 header {
     flex: 0.3;
     background-color: rgb(115, 187, 211);
@@ -22,8 +25,33 @@ main {
 
 section{
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+#form-input {
+    flex: 1;
 }
 
+#search-history {
+    flex: 2;
+}
 aside {
     flex: 2;
+    display: flex;
+    flex-direction: column;
+}
+#today-forcast {
+    flex:2;
+    display: flex;
+    flex-direction: column;
+}
+#today-forcast img {
+    width: 200px;
+}
+#five-day-forcast {
+    flex: 1;
+}
+#weather-forcast {
+    display: flex;
+    justify-content: space-around;
 }
