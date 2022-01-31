@@ -16,8 +16,9 @@ function init(){
 
 function renderCities(){
     searchHistory.innerHTML = "";
-    for(var i = 0; i < cities.length; i++){
-        var city = cities[i];
+    var filterCities = [...new Set(cities)];
+    for(var i = 0; i < filterCities.length; i++){
+        var city = filterCities[i];
         var li = document.createElement("li");
         li.textContent = city;
         searchHistory.append(li);
@@ -71,6 +72,8 @@ fetch(requestweatherUrl)
         return response.json();
     })
     .then(function (data){
+        var lat = data.coord.lat;
+        var lon = data.coord.lon;
         var temp = data.main.temp;
         var humidity = data.main.humidity;
         var windspeed = data.wind.speed;
@@ -88,7 +91,6 @@ fetch(requestweatherUrl)
         humidityInfo.textContent = "Humidity: " + humidity;
         windspeedInfo.textContent = "Wind: " + windspeed;
         todayForcast.append(cityName);
-        todayForcast.append(currentDate);
         todayForcast.append(img);
         li.append(tempInfo);
         li.append(humidityInfo);
@@ -99,9 +101,24 @@ fetch(requestweatherUrl)
         cityInput.value = "";
         storeCity();
         renderCities();
+        getCurrentUvi(lat, lon, apiKey);
     })
         }
 
+function getCurrentUvi(lat, lon, apiKey){
+    var requestUviWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
+fetch(requestUviWeatherUrl)
+    .then(function (response){
+        return response.json();
+    })
+    .then( function (data){
+        var currentUvi = data.current.uvi;
+        var uviInfo = document.createElement("p");
+        uviInfo.textContent = "UV Index: " + currentUvi;
+        todayForcast.append(uviInfo);
+
+    })
+}
 search.addEventListener("click", function(){
     if(cityInput.value !== null){
         getCurrentForcast()
