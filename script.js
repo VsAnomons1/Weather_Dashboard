@@ -71,7 +71,6 @@ fetch(requestweatherUrl)
         return response.json();
     })
     .then(function (data){
-        var forcastDate = data.dt;
         var temp = data.main.temp;
         var humidity = data.main.humidity;
         var windspeed = data.wind.speed;
@@ -79,13 +78,11 @@ fetch(requestweatherUrl)
         var ul = document.createElement("ul");
         var li = document.createElement("li");
         var img = document.createElement("img");
-        var cityName = document.querySelector("h2");
-        var currentDate = document.querySelector("h3");
+        var cityName = document.createElement("h2");
         var tempInfo = document.createElement("p");
         var humidityInfo = document.createElement("p");
         var windspeedInfo = document.createElement("p");
         cityName.textContent = cityInput.value;
-        currentDate.textContent = "Date: " + forcastDate;
         img.setAttribute("src", "http://openweathermap.org/img/wn/" +weatherIconImg + "@2x.png");
         tempInfo.textContent = "Temp: " + temp;
         humidityInfo.textContent = "Humidity: " + humidity;
@@ -99,6 +96,7 @@ fetch(requestweatherUrl)
         ul.append(li);
         todayForcast.append(ul);
         cities.push(cityName.textContent);
+        cityInput.value = "";
         storeCity();
         renderCities();
     })
@@ -108,7 +106,6 @@ search.addEventListener("click", function(){
     if(cityInput.value !== null){
         getCurrentForcast()
         getFiveForcast()
-        cityInput.value = "";
     }
         });
 init()
