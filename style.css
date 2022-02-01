@@ -2,16 +2,25 @@
     box-sizing:border-box;
     font-family: 'Times New Roman', Times, serif;
 }
+
 body {
     display: flex;
     flex-direction: column;
     height: 100vh;
     margin: 0;
 }
+
 ul {
     margin: 0;
+    padding: 1%;
     list-style-type: none;
+    background-color:rgb(115, 187, 211);
 }
+
+span {
+    content: "\2109";
+}
+
 header {
     flex: 0.3;
     background-color: rgb(115, 187, 211);
@@ -28,6 +37,7 @@ section{
     display: flex;
     flex-direction: column;
 }
+
 #form-input {
     flex: 1;
 }
@@ -35,23 +45,99 @@ section{
 #search-history {
     flex: 2;
 }
+
+#search-history h3 {
+    padding: 5%;
+    background-color: rgb(115, 187, 211);
+    text-align: center;
+   border: 2px 0px dashed black;
+}
+
+#search-history ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#search-history li {
+    background-color: lightblue;
+    text-align: center;
+    margin: 1%;
+    padding: 2%;
+    width: 100%;
+}
+
 aside {
     flex: 2;
     display: flex;
     flex-direction: column;
 }
+
 #today-forcast {
     flex:2;
     display: flex;
+    align-items: center;
     flex-direction: column;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    padding: 1%;
 }
+
+#today-forcast h2:first-child {
+    border-bottom: 2px solid black;
+}
+
+#today-forcast ul {
+    width: 100%;
+}
+
 #today-forcast img {
     width: 200px;
 }
+
+#today-forcast div p:last-child {
+    padding: 7%;
+    border: 1px solid black;
+}
+
+#today-forcast ul li p:first-child::after {
+    content: "\2109";
+}
+
 #five-day-forcast {
     flex: 1;
 }
+
+#five-day-forcast h3 {
+    border-bottom: 2px solid black;
+}
+
+#five-day-forcast li {
+border-left: 2px solid black; 
+    border: 2px solid black;
+    background-color: lightblue;
+    text-align: center;
+    margin: 1%;
+    flex: 1;
+}
+
 #weather-forcast {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
+}
+
+#weather-forcast li p:nth-child(3)::after {
+    content: "\2109";
+}
+
+@media screen and (min-width: 300px) and (max-width: 958px)
+{
+    main {
+        flex-direction: column;
+    }
+
+    #today-forcast {
+        border-left: none;
+    }
 }
