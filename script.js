@@ -50,9 +50,9 @@ fetch (requestforcastUrl)
     var windspeedInfo = document.createElement("p");
     var forcastDateInfo = document.createElement("p");
     tempInfo.textContent = "Temp: " + temp;
-    humidityInfo.textContent = "Humidity: " + humidity;
-    windspeedInfo.textContent = "Wind: " + windspeed;
-    forcastDateInfo.textContent = "Date: " + forcastDate.substring(0, 9);
+    humidityInfo.textContent = "Humidity: " + humidity + "%";
+    windspeedInfo.textContent = "Wind: " + windspeed + "MPH";
+    forcastDateInfo.textContent = "Date: " + forcastDate.substring(0, 10);
     img.setAttribute("src", "http://openweathermap.org/img/wn/" +weatherIconImg + "@2x.png")
     li.append(forcastDateInfo);
     li.append(img);
@@ -74,6 +74,8 @@ fetch(requestweatherUrl)
     .then(function (data){
         var lat = data.coord.lat;
         var lon = data.coord.lon;
+        var currentDate = new Date(data.dt * 1000);
+        var utcDate = currentDate.toUTCString();
         var temp = data.main.temp;
         var humidity = data.main.humidity;
         var windspeed = data.wind.speed;
@@ -81,15 +83,18 @@ fetch(requestweatherUrl)
         var ul = document.createElement("ul");
         var li = document.createElement("li");
         var img = document.createElement("img");
+        var dateTime = document.createElement("h2")
         var cityName = document.createElement("h2");
         var tempInfo = document.createElement("p");
         var humidityInfo = document.createElement("p");
         var windspeedInfo = document.createElement("p");
+        dateTime.textContent = "Date: " + utcDate.substring(0, 11);
         cityName.textContent = cityInput.value;
         img.setAttribute("src", "http://openweathermap.org/img/wn/" +weatherIconImg + "@2x.png");
         tempInfo.textContent = "Temp: " + temp;
-        humidityInfo.textContent = "Humidity: " + humidity;
-        windspeedInfo.textContent = "Wind: " + windspeed;
+        humidityInfo.textContent = "Humidity: " + humidity + "%";
+        windspeedInfo.textContent = "Wind: " + windspeed + "MPH";
+        todayForcast.append(dateTime);
         todayForcast.append(cityName);
         todayForcast.append(img);
         li.append(tempInfo);
@@ -114,8 +119,23 @@ fetch(requestUviWeatherUrl)
     .then( function (data){
         var currentUvi = data.current.uvi;
         var uviInfo = document.createElement("p");
-        uviInfo.textContent = "UV Index: " + currentUvi;
-        todayForcast.append(uviInfo);
+        var uviValue = document.createElement("p");
+        var div = document.createElement("div");
+        uviInfo.textContent = "UV Index";
+        uviValue.textContent = currentUvi;
+        if(currentUvi <= 2){
+            uviValue.setAttribute("style", "background-color: lightgreen;");
+        }
+        else if(currentUvi > 2 && currentUvi <= 7){
+            uviValue.setAttribute("style", "background-color: lightyellow;");
+        }
+        else{
+            
+            uviValue.setAttribute("style", "background-color: lightred;");
+        }
+        div.append(uviInfo);
+        div.append(uviValue);
+        todayForcast.append(div);
 
     })
 }
