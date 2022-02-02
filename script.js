@@ -31,7 +31,7 @@ function storeCity(){
 
 function getFiveForcast(){
 var apiKey = "4f059f7bfca054edbd22eb4a94ffa229";
-var requestforcastUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityInput.value + "&units=imperial" + "&appid=" + apiKey;
+var requestforcastUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityInput.value + "&units=imperial" + "&appid=" + apiKey;
 fetch (requestforcastUrl)
 .then(function (response) {
     return response.json();
@@ -53,7 +53,7 @@ fetch (requestforcastUrl)
     humidityInfo.textContent = "Humidity: " + humidity + "%";
     windspeedInfo.textContent = "Wind: " + windspeed + "MPH";
     forcastDateInfo.textContent = "Date: " + forcastDate.substring(0, 10);
-    img.setAttribute("src", "http://openweathermap.org/img/wn/" +weatherIconImg + "@2x.png")
+    img.setAttribute("src", "https://openweathermap.org/img/wn/" +weatherIconImg + "@2x.png")
     li.append(forcastDateInfo);
     li.append(img);
     li.append(tempInfo);
@@ -66,7 +66,7 @@ fetch (requestforcastUrl)
 
 function getCurrentForcast(){
 var apiKey = "4f059f7bfca054edbd22eb4a94ffa229";
-var requestweatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityInput.value + "&units=imperial" + "&appid=" + apiKey;
+var requestweatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput.value + "&units=imperial" + "&appid=" + apiKey;
 fetch(requestweatherUrl)
     .then(function (response) {
         return response.json();
@@ -90,7 +90,7 @@ fetch(requestweatherUrl)
         var windspeedInfo = document.createElement("p");
         dateTime.textContent = "Date: " + utcDate.substring(0, 11);
         cityName.textContent = cityInput.value;
-        img.setAttribute("src", "http://openweathermap.org/img/wn/" +weatherIconImg + "@2x.png");
+        img.setAttribute("src", "https://openweathermap.org/img/wn/" +weatherIconImg + "@2x.png");
         tempInfo.textContent = "Temp: " + temp;
         humidityInfo.textContent = "Humidity: " + humidity + "%";
         windspeedInfo.textContent = "Wind: " + windspeed + "MPH";
