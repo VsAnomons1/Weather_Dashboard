@@ -4,7 +4,7 @@ var todayForcast = document.querySelector("#today-forcast");
 var forcastDays = document.querySelector("#weather-forcast");
 var searchHistory = document.querySelector("#search-history ul");
 var cities = [];
-
+// Updates cities to the localstorage data upon load
 function init(){
     var storeCities = JSON.parse(localStorage.getItem("storeCities"));
     if(storeCities !== null){
@@ -13,9 +13,10 @@ function init(){
     renderCities();
 
 }   
-
+// Renders cities that been previously searched
 function renderCities(){
     searchHistory.innerHTML = "";
+// filters to distinct cities only
     var filterCities = [...new Set(cities)];
     for(var i = 0; i < filterCities.length; i++){
         var city = filterCities[i];
@@ -24,11 +25,11 @@ function renderCities(){
         searchHistory.append(li);
     }
 }
-
+// stores the cities array to the localstorage
 function storeCity(){
     localStorage.setItem("storeCities", JSON.stringify(cities));
 }
-
+// fetches the five-day forcast weather data from the Open Weather Api
 function getFiveForcast(){
 var apiKey = "4f059f7bfca054edbd22eb4a94ffa229";
 var requestforcastUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityInput.value + "&units=imperial" + "&appid=" + apiKey;
@@ -63,7 +64,7 @@ fetch (requestforcastUrl)
     }
 })
 }
-
+// fetches the current weather data from the Open Weather Api
 function getCurrentForcast(){
 var apiKey = "4f059f7bfca054edbd22eb4a94ffa229";
 var requestweatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput.value + "&units=imperial" + "&appid=" + apiKey;
@@ -109,7 +110,7 @@ fetch(requestweatherUrl)
         getCurrentUvi(lat, lon, apiKey);
     })
         }
-
+// fetches the current Uvi Index of the forcast in Open Weather Api
 function getCurrentUvi(lat, lon, apiKey){
     var requestUviWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
 fetch(requestUviWeatherUrl)
@@ -139,6 +140,7 @@ fetch(requestUviWeatherUrl)
 
     })
 }
+// Checks if input text is empty before excecuting
 search.addEventListener("click", function(){
     if(cityInput.value !== null){
         getCurrentForcast()
