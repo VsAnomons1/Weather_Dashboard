@@ -1,4 +1,7 @@
+var body = document.querySelector("body");
 var cityInput = document.querySelector("input");
+var queryCity = document.location.href.split("=")[1];
+cityInput.setAttribute("value", queryCity);
 var search = document.querySelector("button");
 var todayForcast = document.querySelector("#today-forcast");
 var forcastDays = document.querySelector("#weather-forcast");
@@ -142,9 +145,12 @@ fetch(requestUviWeatherUrl)
 }
 // Checks if input text is empty before excecuting
 search.addEventListener("click", function(){
-    if(cityInput.value !== null){
-        getCurrentForcast()
-        getFiveForcast()
-    }
-        });
-init()
+        if(cityInput !== null){
+        getCurrentForcast();
+        getFiveForcast();
+        }
+});
+init();
+// Sets the intial city weather
+getCurrentForcast();
+getFiveForcast();
