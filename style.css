@@ -1,4 +1,4 @@
-* {
+/* * {
     box-sizing:border-box;
     font-family: 'Times New Roman', Times, serif;
 }
@@ -21,24 +21,24 @@ span {
     content: "\2109";
 }
 
-header {
+/* header {
     flex: 0.3;
     background-color: rgb(115, 187, 211);
-}
+} */
 
-main {
+/* main {
     flex: 2;
     display: flex;
     background-color: rgb(202, 235, 247);
-}
+} */
 
-section{
+/* section{
     flex: 1;
     display: flex;
     flex-direction: column;
-}
+} */
 
-#form-input {
+/* #form-input {
     flex: 1;
 }
 
@@ -140,4 +140,13 @@ border-left: 2px solid black;
     #today-forcast {
         border-left: none;
     }
+} */ 
+body {
+    font-family: 'Roberto Slab', sans-serif;
+}
+.container-fluid {
+    background-color: #1e4cd5;
+}
+tr .card {
+    width: 12em;
 }
