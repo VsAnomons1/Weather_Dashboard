@@ -1,14 +1,14 @@
 # Weather_Dashboard
 ## Description
-This project is a weather application that gets the current and the five-day weather forcast by providing the city name. This was done by a Third-party Open Weather Api was that was use to retrieve the weather data along side the Fetch Api to be able to get the HTTP request. Other technologies that were used in part of the application were HTML, CSS, and Javascript.
+This project is a weather application that gets the current and the five-day weather forcast by providing the city name. This was done by the Open Weather Api which was use to retrieve the weather data along side the Fetch Api. Bootstrap for the website's layout design. Other technologies that were included in this project were HTML, CSS, and Javascript. 
 ## Demo
-![Demo on the Weather Dashboard](Weather-Dashboard.gif)
+![Demo on the Weather Dashboard](weather_dashboard.gif)
 ## Link
 [Weather Dashboard](https://vsanomons1.github.io/Weather_Dashboard/)
 ## License
 MIT License
 
-Copyright (c) [2022] [Eric Mellin Alvarado]
+Copyright (c) [2023] [Eric Mellin Alvarado]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
