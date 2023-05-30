@@ -5,9 +5,8 @@ cityInput.setAttribute("value", queryCity);
 var search = document.querySelector("button");
 var todayForcast = document.querySelector("#today-forcast");
 var forcastDays = document.querySelector("#weather-forcast");
-var searchHistory = document.querySelector("#search-history");
+var searchHistory = document.querySelector(".dropdown-menu");
 var cities = [];
-console.log(forcastDays);
 // Updates cities to the localstorage data upon load
 function init(){
     var storeCities = JSON.parse(localStorage.getItem("storeCities"));
@@ -44,9 +43,10 @@ fetch (requestforcastUrl)
     return response.json();
 })
 .then(function (data){
-    console.log(data);
+   
     for(var i = 0; i < 40; i += 8){
-    var forcastDate = data.list[i].dt_txt;
+    var forcastDate = new Date(data.list[i].dt_txt);
+    var dayOfTheWeek = String(forcastDate).slice(0, 4);
     var temp = data.list[i].main.temp;
     var humidity = data.list[i].main.humidity;
     var windspeed = data.list[i].wind.speed;
@@ -67,10 +67,12 @@ fetch (requestforcastUrl)
     var windspeedInfo = document.createElement("li");
     windspeedInfo.setAttribute("class", "list-group-item");
     var forcastDateInfo = document.createElement("p");
-    tempInfo.textContent = "Temp: " + temp;
+    var span = document.createElement("span");
+    span.innerHTML = "&#176;";
+    tempInfo.textContent = "Temp: " + Math.ceil(temp) + span.innerText;
     humidityInfo.textContent = "Humidity: " + humidity + "%";
     windspeedInfo.textContent = "Wind: " + windspeed + "MPH";
-    forcastDateInfo.textContent = "Date: " + forcastDate.substring(0, 10);
+    forcastDateInfo.textContent = dayOfTheWeek;
     img.setAttribute("src", "https://openweathermap.org/img/wn/" +weatherIconImg + "@2x.png");
     td.append(card);
     card.append(cardBody);
@@ -121,9 +123,13 @@ fetch(requestweatherUrl)
         var humidityInfo = document.createElement("p");
         var windspeedInfo = document.createElement("p");
         dateTime.textContent = "Date: " + utcDate.substring(0, 11);
-        cityName.textContent = cityInput.value;
+        // sets city to Pascal case
+        var setName = cityInput.value[0].toUpperCase() + cityInput.value.slice(1).toLowerCase();
+        cityName.textContent = setName;
         img.setAttribute("src", "https://openweathermap.org/img/wn/" +weatherIconImg + "@2x.png");
-        tempInfo.textContent = "Temp: " + temp;
+        var span = document.createElement("span");
+        span.innerHTML = "&#176;";
+        tempInfo.textContent = "Temp: " + Math.ceil(temp) + span.innerText;
         humidityInfo.textContent = "Humidity: " + humidity + "%";
         windspeedInfo.textContent = "Wind: " + windspeed + "MPH";
         cardBody.append(cityName);
@@ -162,17 +168,24 @@ fetch(requestUviWeatherUrl)
         uviValue.textContent = currentUvi;
         if(currentUvi <= 2){
             progressBar.setAttribute("class", "bg-success");
-            progressBar.setAttribute("style", "width: 25%");
+            progressBar.setAttribute("style", "width: 20%");
         }
-        else if(currentUvi > 2 && currentUvi <= 7){
+        else if(currentUvi > 2 && currentUvi <= 5){
             progressBar.setAttribute("class", "bg-warning");
-            progressBar.setAttribute("style", "width: 50%");
+            progressBar.setAttribute("style", "width: 40%");
 
         }
-        else{
-            
+        else if(currentUvi >= 6 && currentUvi <= 7){
+            progressBar.setAttribute("style", "background-color: lightorange;");
+            progressBar.setAttribute("style", "width: 60%");
+        }
+        else if(currentUvi >= 8 && currentUvi <= 10){
             progressBar.setAttribute("class", "bg-danger");
-            progressBar.setAttribute("style", "width: 75%");
+            progressBar.setAttribute("style", "width: 80%");
+        }
+        else {
+            progressBar.setAttribute("style", "background-color: lightpurple;");
+            progressBar.setAttribute("style", "width: 100%");
         }
         progress.append(progressBar);
         cardBody.append(uviInfo);
@@ -190,12 +203,15 @@ search.addEventListener("click", function(){
         getFiveForcast();
         }
 });
-// history.addEventListener("click", function(e){
-//     todayForcast.innerHTML = "";
-//     forcastDays.innerHTML = "";
-//     getCurrentForcast();
-//     getFiveForcast();
-// });
+// Gets previous search cities
+searchHistory.addEventListener("click", function(e){
+    var cityTarget = e.target;
+    cityInput.value = cityTarget.textContent;
+    todayForcast.innerHTML = "";
+    forcastDays.innerHTML = "";
+    getCurrentForcast();
+    getFiveForcast();
+});
 init();
 // Sets the intial city weather
 getCurrentForcast();

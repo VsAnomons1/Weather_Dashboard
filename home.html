@@ -16,10 +16,10 @@
         <div class="row h-100">
             <header class="col-12 d-flex flex-column h-20" id="input-form">
                 <h1 class="text-center text-light my-1">Weather Dashboard</h1>
-                <input class="form-control mt-2" placeholder="Type in a city name">
-                <button class="btn btn-secondary mb-2">Search</button>
-                <div class="dropdown">
-                    <button class="dropdown-toggle" data-bs-toggle="dropdown">Previous Searches</button>
+                <input id="search-bar" class="form-control mt-2" placeholder="Type in a city name">
+                <button id="btn" class="btn btn-secondary mb-2">Search</button>
+                <div id="dropdown" class="dropdown">
+                    <button class="dropdown-toggle rounded" data-bs-toggle="dropdown">Previous Searches</button>
                     <ul class="dropdown-menu" id="search-history">
                     </ul>
                 </div>
@@ -28,7 +28,7 @@
                 <section id="today" class="col-12 col-lg-4">
                     <div id="today-forcast" class="card">
                     <div class="card-header">
-                        <h2>Today's Forcast</h2>
+                        <h2 class="text-light">Today's Forcast</h2>
                     </div>
                     </div>
                 </section>
@@ -36,7 +36,9 @@
                     <div class="table-responsive">
                     <table class="table border" id="five-day-forcast">
                         <thead>
-                            <th>5-Day Forcast</th>
+                            <th>
+                                <h3 class="text-light">5-Day Forcast</h3>
+                            </th>
                             <th></th>
                             <th></th>
                             <th></th>
